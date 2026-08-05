@@ -16,13 +16,18 @@
   - 기상청 Open API 연동
   - 기상 데이터 조회 및 화면 출력
   - API 응답 데이터 가공
+  - WeatherData → SensorData 표준화
   - API 예외 처리
   - 원본 API 응답(JSON) 확인 기능
+  - 표준화된 SensorData(JSON) 확인 기능
 - 주요 기능:
   - 기온, 습도, 강수확률, 강수량 조회
+  - WeatherData 생성
+  - SensorData 표준화
   - 마지막 조회 시각 표시
   - 데이터 출처 표시
-  - 원본 API 응답 보기/숨기기
+  - 원본 API 응답(JSON) 보기/숨기기
+  - 표준화된 SensorData(JSON) 보기/숨기기
 
 ## 2. 사용 기술
 
@@ -138,9 +143,7 @@ VITE_KMA_SERVICE_KEY=
 
 ## 8. 데이터 표준화 방법
 
-※미구현
-
-- 원본 응답 구조:
+- 기상청 Open API 응답을 WeatherData 객체로 가공한 후 SensorData 구조로 표준화
 - 표준 데이터 구조:
 
 ```ts
@@ -159,9 +162,11 @@ interface SensorData {
 ```
 
 - 컬럼 변환 방법:
-- 결측값 처리:
-- 중복값 처리:
-- 시간 형식 처리:
+  - `WeatherData`를 `sensorMapper`를 통해 `SensorData[]`로 변환
+  - 센서 ID, 이름, 타입, 단위는 메타데이터로 관리하여 공통 SensorData 구조를 생성
+- 결측값 처리: 강수량이 `"강수없음"`인 경우 `0(mm)`으로 변환
+- 중복값 처리: 동일 예보 시각(fcstTime)의 데이터만 선택하여 변환하므로 중복 데이터가 생성되지 않음
+- 시간 형식 처리: 센서 데이터 생성 시 `Date.toISOString()`을 사용하여 ISO 8601 형식으로 저장
 
 ## 9. 3D 구현 설명
 
@@ -218,6 +223,7 @@ interface SensorData {
 - 주요 화면:
   - 기상 데이터 조회 화면
   - 원본 API 응답(JSON) 확인 화면
+  - SensorData(JSON) 확인 화면
 - 정상 상태: 기상 데이터를 정상적으로 조회하고 화면에 출력
 - 이상 상태: 미구현
 - 알람 발생 화면: 미구현
@@ -226,14 +232,12 @@ interface SensorData {
 ## 13. 미구현 사항 및 한계
 
 - 구현하지 못한 기능:
-  - 데이터 표준화
   - 3D 디지털 트윈
   - 센서 데이터 연동
   - 이상 탐지 및 AI 분석
 - 발생한 문제: 기상청 Open API의 응답 구조가 복잡해 데이터 가공 과정 필요
 - 해결하지 못한 이유: 단계별 진행에 따라 현재 Open API 연동 구현에 집중
 - 추가 개발 방향: 
-  - SensorData 표준화
   - React Three Fiber 기반 3D 시각화
   - 설비 상태 모니터링
   - 이상 탐지 및 AI 기반 운영 지원 기능 추가
