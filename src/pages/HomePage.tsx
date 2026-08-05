@@ -39,6 +39,7 @@ function HomePage() {
             <h1 className="title">Smart Rainwater Monitoring System</h1>
             <TwinScene
                 selectedEquipment={selectedEquipment}
+                equipmentStatus={equipmentStatus}
                 onSelectEquipment={setSelectedEquipment}
             />
             <WeatherCard

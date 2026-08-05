@@ -10,3 +10,10 @@ export interface EquipmentStatus {
         quality?: number;
     };
 }
+
+export interface EquipmentStatusMap {
+    tank: EquipmentStatus;
+    pump: EquipmentStatus;
+    filter: EquipmentStatus;
+    reuseTank: EquipmentStatus;
+}

@@ -1,9 +1,15 @@
+import type { EquipmentState } from "../types/EquipmentStatus";
+import { getEquipmentColor } from "../utils/getEquipmentColor";
+
 interface PumpProps {
     onSelect: () => void;
     onHover: (hover: boolean) => void;
+    state: EquipmentState;
 }
 
-export default function Pump({ onSelect, onHover, }: PumpProps) {
+export default function Pump({ onSelect, onHover, state, }: PumpProps) {
+    const color = getEquipmentColor(state);
+
     return (
         <mesh
             position={[-2, 1, 0]}
@@ -16,7 +22,7 @@ export default function Pump({ onSelect, onHover, }: PumpProps) {
             }}
         >
             <cylinderGeometry args={[0.6, 0.6, 2.2, 32]} />
-            <meshStandardMaterial color="#9CA3AF" />
+            <meshStandardMaterial color={color} />
         </mesh>
     );
 }

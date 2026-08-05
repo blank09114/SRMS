@@ -17,13 +17,17 @@ import Pipe from "../models/Pipe";
 import type { Equipment } from "../types/Equipment";
 import { EQUIPMENT } from "../data/equipment";
 
+import type { EquipmentStatusMap } from "../types/EquipmentStatus";
+
 interface TwinSceneProps {
     selectedEquipment: Equipment | null;
+    equipmentStatus: EquipmentStatusMap;
     onSelectEquipment: (equipment: Equipment | null) => void;
 }
 
 export default function TwinScene({
     selectedEquipment,
+    equipmentStatus,
     onSelectEquipment,
 }: TwinSceneProps) {
     const [hoveredEquipment, setHoveredEquipment] =
@@ -58,6 +62,7 @@ export default function TwinScene({
                     hoveredEquipment?.id === "tank"
                 }>
                     <Tank
+                        state={equipmentStatus.tank.status}
                         onSelect={() => onSelectEquipment(EQUIPMENT.tank)}
                         onHover={(hover) => handleHover(EQUIPMENT.tank, hover)}
                     />
@@ -70,6 +75,7 @@ export default function TwinScene({
                     hoveredEquipment?.id === "pump"
                 }>
                     <Pump
+                        state={equipmentStatus.pump.status}
                         onSelect={() => onSelectEquipment(EQUIPMENT.pump)}
                         onHover={(hover) => handleHover(EQUIPMENT.pump, hover)}
                     />
@@ -82,6 +88,7 @@ export default function TwinScene({
                     hoveredEquipment?.id === "filter"
                 }>
                     <Filter
+                        state={equipmentStatus.filter.status}
                         onSelect={() => onSelectEquipment(EQUIPMENT.filter)}
                         onHover={(hover) => handleHover(EQUIPMENT.filter, hover)}
                     />
@@ -94,6 +101,7 @@ export default function TwinScene({
                     hoveredEquipment?.id === "reuseTank"
                 }>
                     <ReuseTank
+                        state={equipmentStatus.reuseTank.status}
                         onSelect={() => onSelectEquipment(EQUIPMENT.reuseTank)}
                         onHover={(hover) => handleHover(EQUIPMENT.reuseTank, hover)}
                     />

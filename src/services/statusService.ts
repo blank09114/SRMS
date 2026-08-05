@@ -1,4 +1,6 @@
-export function getEquipmentStatus() {
+import type { EquipmentStatusMap } from "../types/EquipmentStatus";
+
+export function getEquipmentStatus(): EquipmentStatusMap {
     return {
         tank: {
             status: "normal",

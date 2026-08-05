@@ -1,15 +1,9 @@
 import type { Equipment } from "../types/Equipment";
-import type { EquipmentStatus } from "../types/EquipmentStatus";
+import type { EquipmentStatusMap } from "../types/EquipmentStatus";
 
 interface EquipmentCardProps {
     equipment: Equipment | null;
-
-    equipmentStatus: {
-        tank: EquipmentStatus;
-        pump: EquipmentStatus;
-        filter: EquipmentStatus;
-        reuseTank: EquipmentStatus;
-    };
+    equipmentStatus: EquipmentStatusMap;
 }
 
 export default function EquipmentCard({
@@ -33,7 +27,6 @@ export default function EquipmentCard({
                     <p className="cardText">
                         상태 : {status.status}
                     </p>
-
                     <p className="cardText">
                         {status.sensors.waterLevel !== undefined &&
                             <>수위: {status.sensors.waterLevel}%</>}
