@@ -1,0 +1,35 @@
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css");
+
+:root {
+    --color-primary: 37, 99, 235;
+    --color-secondary: 15, 118, 110;
+
+    --color-background: 248, 250, 252;
+    --color-surface: 255, 255, 255;
+
+    --color-text-primary: 31, 41, 55;
+    --color-text-secondary: 107, 114, 128;
+
+    --color-border: 209, 213, 219;
+
+    --color-normal: 156, 163, 175;
+    --color-warning: 245, 158, 11;
+    --color-danger: 220, 38, 38;
+
+    --px-xs: 5px;
+    --px-sm: 10px;
+    --px-md: 20px;
+    --px-lg: 30px;
+}
+
+html.no-transition *, html.no-transition *::before, html.no-transition *::after
+{ transition: none !important; }
+*
+{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+    font-family: 'Pretendard Variable';
+    color: rgb(var(--color-text-primary));
+}
