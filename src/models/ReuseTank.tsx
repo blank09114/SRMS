@@ -1,8 +1,19 @@
-import type { ThreeElements } from "@react-three/fiber";
+interface ReuseTankProps {
+    onSelect: () => void;
+    onHover: (hover: boolean) => void;
+}
 
-export default function ReuseTank() {
+export default function ReuseTank({ onSelect, onHover, }: ReuseTankProps) {
     return (
-        <mesh position={[4.5, 1.2, 0]}>
+        <mesh
+            position={[4.5, 1.2, 0]}
+            onPointerOver={() => onHover(true)}
+            onPointerOut={() => onHover(false)}
+            onClick={(e) => {
+                e.stopPropagation();
+                onSelect();
+            }}
+        >
             <boxGeometry args={[3.5, 3, 2.8]} />
             <meshStandardMaterial color="#9CA3AF" />
         </mesh>
