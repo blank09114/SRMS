@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { getWeather } from "../api/weatherApi";
 import type { WeatherResponse } from "../types/WeatherResponse";
+import TwinScene from "../components/TwinScene";
 
 function HomePage() {
     const [weatherData, setWeatherData] = useState<WeatherResponse | null>(null);
@@ -37,6 +38,8 @@ function HomePage() {
     return (
         <div>
             <h1>SRMS</h1>
+
+            <TwinScene/>
 
             <h2>기상청 데이터</h2>
 
