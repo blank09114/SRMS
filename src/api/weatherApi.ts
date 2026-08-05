@@ -1,5 +1,6 @@
 import { mapWeatherData } from "../services/weatherMapper";
 import type { WeatherResponse } from "../types/WeatherResponse";
+import { mapWeatherToSensorData } from "../services/sensorMapper";
 
 const BASE_URL =
     "https://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst";
@@ -32,8 +33,12 @@ export async function getWeather(): Promise<WeatherResponse> {
     const forecastTime = items[0].fcstTime;
     const forecastItems = items.filter((item: any) => item.fcstTime === forecastTime);
 
+    const weather = mapWeatherData(forecastItems);
+
     return {
-        weather: mapWeatherData(forecastItems),
+        weather,
+        sensors: mapWeatherToSensorData(weather),
+
         rawData: items,
         fetchedAt: new Date(),
     };
