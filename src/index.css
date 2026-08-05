@@ -24,8 +24,7 @@
 
 html.no-transition *, html.no-transition *::before, html.no-transition *::after
 { transition: none !important; }
-*
-{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
