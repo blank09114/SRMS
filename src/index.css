@@ -1,14 +1,10 @@
 @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css");
 
 :root {
-    --color-primary: 37, 99, 235;
-    --color-secondary: 15, 118, 110;
-
-    --color-background: 248, 250, 252;
+    --color-background: 15, 23, 42;
     --color-surface: 255, 255, 255;
 
-    --color-text-primary: 31, 41, 55;
-    --color-text-secondary: 107, 114, 128;
+    --color-text: 31, 41, 55;
 
     --color-border: 209, 213, 219;
 
@@ -16,7 +12,6 @@
     --color-warning: 245, 158, 11;
     --color-danger: 220, 38, 38;
 
-    --px-xs: 5px;
     --px-sm: 10px;
     --px-md: 20px;
     --px-lg: 30px;
@@ -30,5 +25,64 @@ html.no-transition *, html.no-transition *::before, html.no-transition *::after
     box-sizing: border-box;
 
     font-family: 'Pretendard Variable';
-    color: rgb(var(--color-text-primary));
+    color: rgb(var(--color-text));
+    text-align: center;
+}
+body { background: rgb(var(--color-background)); }
+
+.flex-center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.page {
+    width: 100%;
+    height: 100vh;
+    position: relative;
+}
+
+.title {
+    width: 100%;
+
+    font-size: 30px;
+    color: rgb(var(--color-surface));
+    
+    position: absolute;
+    top: var(--px-lg);
+}
+
+.card {
+    position: absolute;
+
+    padding: var(--px-md);
+    background-color: rgb(var(--color-surface), 0.5);
+
+    gap: var(--px-sm);
+}
+
+.stat {
+    width: 400px;
+    min-height: 600px;
+
+    top: 50%;
+    right: var(--px-lg);
+    transform: translateY(-50%);
+}
+
+.weather {
+    bottom: var(--px-lg);
+    left: var(--px-lg);
+}
+
+.cardTitle { font-size: 24px; }
+
+.cardText {
+    width: 100%;
+    
+    text-align: left;
+
+    font-size: 16px;
+    line-height: 1.5;
 }
