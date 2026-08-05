@@ -15,7 +15,7 @@ function HomePage() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
     const [selectedEquipment, setSelectedEquipment] = useState<Equipment | null>(null);
-    const equipmentStatus = getEquipmentStatus();
+    const equipmentStatus = weatherData? getEquipmentStatus(weatherData.sensors): null;
 
     useEffect(() => {
         async function loadWeather() {

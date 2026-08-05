@@ -1,9 +1,11 @@
 import type { Equipment } from "../types/Equipment";
 import type { EquipmentStatusMap } from "../types/EquipmentStatus";
 
+import { getStatusText } from "../utils/getStatusText";
+
 interface EquipmentCardProps {
     equipment: Equipment | null;
-    equipmentStatus: EquipmentStatusMap;
+    equipmentStatus: EquipmentStatusMap | null;
 }
 
 export default function EquipmentCard({
@@ -11,9 +13,9 @@ export default function EquipmentCard({
     equipmentStatus,
 }: EquipmentCardProps) {
     const status =
-    equipment
-        ? equipmentStatus[equipment.id as keyof typeof equipmentStatus]
-        : null;
+        equipment && equipmentStatus
+            ? equipmentStatus[equipment.id as keyof EquipmentStatusMap]
+            : null;
 
     return (
         <div className="card equipment flex">
@@ -25,18 +27,15 @@ export default function EquipmentCard({
             {equipment && status ? (
                 <>
                     <p className="cardText">
-                        상태 : {status.status}
-                    </p>
-                    <p className="cardText">
+                        상태: <span className={status.status === "normal"? "": `status-${status.status}`}>
+                            {getStatusText(status.status)}
+                        </span> <br/>
                         {status.sensors.waterLevel !== undefined &&
                             <>수위: {status.sensors.waterLevel}%</>}
-
                         {status.sensors.flowRate !== undefined &&
                             <>유량: {status.sensors.flowRate} L/min</>}
-
                         {status.sensors.filterLoad !== undefined &&
                             <>필터 부하: {status.sensors.filterLoad}%</>}
-
                         {status.sensors.quality !== undefined &&
                             <>수질: {status.sensors.quality}</>}
                     </p>
