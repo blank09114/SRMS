@@ -1,4 +1,19 @@
+@@ -1,41 +1,24 @@
+# Dependencies
+node_modules/
+
+# Build
+dist/
+build/
+
+# Environment Variables
+.env
+
+# Keep example file
+!.env.example
+
 # Logs
+logs/
 logs
 *.log
 npm-debug.log*
@@ -12,11 +27,28 @@ dist
 dist-ssr
 *.local
 
+# Editor
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
+!.vscode/settings.json
+
+.idea/
+*.swp
+*.swo
+
+# OS
 .idea
 .DS_Store
+Thumbs.db
+
+# Coverage
+coverage/
+
+# Cache
+.cache/
+.eslintcache
+.vite/
 *.suo
 *.ntvs*
 *.njsproj
