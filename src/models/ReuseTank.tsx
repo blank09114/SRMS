@@ -1,9 +1,15 @@
+import type { EquipmentState } from "../types/EquipmentStatus";
+import { getEquipmentColor } from "../utils/getEquipmentColor";
+
 interface ReuseTankProps {
     onSelect: () => void;
     onHover: (hover: boolean) => void;
+    state: EquipmentState;
 }
 
-export default function ReuseTank({ onSelect, onHover, }: ReuseTankProps) {
+export default function ReuseTank({ onSelect, onHover, state, }: ReuseTankProps) {
+    const color = getEquipmentColor(state);
+
     return (
         <mesh
             position={[4.5, 1.2, 0]}
@@ -15,7 +21,7 @@ export default function ReuseTank({ onSelect, onHover, }: ReuseTankProps) {
             }}
         >
             <boxGeometry args={[3.5, 3, 2.8]} />
-            <meshStandardMaterial color="#9CA3AF" />
+            <meshStandardMaterial color={color} />
         </mesh>
     );
 }

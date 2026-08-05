@@ -5,6 +5,7 @@ import WeatherCard from "../components/WeatherCard";
 import EquipmentCard from "../components/EquipmentCard";
 
 import { getWeather } from "../api/weatherApi";
+import { getEquipmentStatus } from "../services/statusService";
 
 import type { WeatherResponse } from "../types/WeatherResponse";
 import type { Equipment } from "../types/Equipment";
@@ -14,6 +15,7 @@ function HomePage() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
     const [selectedEquipment, setSelectedEquipment] = useState<Equipment | null>(null);
+    const equipmentStatus = getEquipmentStatus();
 
     useEffect(() => {
         async function loadWeather() {
@@ -37,6 +39,7 @@ function HomePage() {
             <h1 className="title">Smart Rainwater Monitoring System</h1>
             <TwinScene
                 selectedEquipment={selectedEquipment}
+                equipmentStatus={equipmentStatus}
                 onSelectEquipment={setSelectedEquipment}
             />
             <WeatherCard
@@ -44,7 +47,10 @@ function HomePage() {
                 loading={loading}
                 error={error}
             />
-            <EquipmentCard equipment={selectedEquipment} />
+            <EquipmentCard
+                equipment={selectedEquipment}
+                equipmentStatus={equipmentStatus}
+            />
         </main>
     );
 }
