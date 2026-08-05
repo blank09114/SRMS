@@ -11,23 +11,24 @@
 ## 1. 프로젝트 개요
 
 - 프로젝트명: Smart Rainwater Monitoring System(SRMS)
-- 프로젝트 목적: Open API로 수집한 기상 데이터를 활용해 빗물 재활용 시설(Rainwater Recycling Facility)의 설비 상태 모니터링
+- 프로젝트 목적: 기상청 Open API로 수집한 기상 데이터를 공통 SensorData 형식으로 표준화한 후, 빗물 재활용 시설(Rainwater Recycling Facility)의 디지털 트윈(3D) 환경에서 설비 상태를 시각적으로 모니터링
 - 구현 범위:
   - 기상청 Open API 연동
-  - 기상 데이터 조회 및 화면 출력
-  - API 응답 데이터 가공
   - WeatherData → SensorData 표준화
+  - 설비 상태(Status) 계산
+  - React Three Fiber 기반 3D 디지털 트윈
+  - 설비 선택(Click)
+  - 설비 상태 카드
+  - 상태별 색상 시각화
   - API 예외 처리
-  - 원본 API 응답(JSON) 확인 기능
-  - 표준화된 SensorData(JSON) 확인 기능
 - 주요 기능:
-  - 기온, 습도, 강수확률, 강수량 조회
-  - WeatherData 생성
+  - 기상청 Open API를 통한 기상 데이터 조회
   - SensorData 표준화
-  - 마지막 조회 시각 표시
-  - 데이터 출처 표시
-  - 원본 API 응답(JSON) 보기/숨기기
-  - 표준화된 SensorData(JSON) 보기/숨기기
+  - 설비 상태 자동 계산
+  - 3D 설비 모델 표시
+  - 설비 선택 및 상태 조회
+  - Hover Outline 효과
+  - 상태별 색상 표시(정상·주의·위험)
 
 ## 2. 사용 기술
 
@@ -44,14 +45,12 @@
 
 ```text
 SRMS/
-├─ docs/ # 프로젝트 문서
-├─ result/ # 실행 화면 캡처 및 시연 영상
+├─ docs/
+├─ result/
 ├─ src/
 │   ├─ api/
-│   ├─ assets/
 │   ├─ components/
 │   ├─ data/
-│   ├─ hooks/
 │   ├─ models/
 │   ├─ pages/
 │   ├─ services/
@@ -69,9 +68,12 @@ SRMS/
 | docs/ | 프로젝트 문서 |
 | result/ | 실행 화면 캡처 및 제출 자료 |
 | src/api | Open API 호출 |
+| src/components | UI 컴포넌트 |
+| src/models | 3D 설비 모델 |
 | src/pages | 화면 구성 |
 | src/services | API 응답 데이터 가공 |
 | src/types | TypeScript 타입 정의 |
+| src/services | 상태 계산 및 데이터 처리 |
 | src/utils | 공통 유틸리티 함수 |
 
 ## 4. 설치 방법
@@ -170,14 +172,51 @@ interface SensorData {
 
 ## 9. 3D 구현 설명
 
-※미구현
-
 - 사용한 3D 기술:
+  - React Three Fiber
+  - Three.js
 - 설비 구성(최소 4종):
-  -
+  - 저장탱크(Storage Tank)
+  - 펌프(Pump)
+  - 필터(Filter)
+  - 재사용탱크(Reuse Tank)
 - 객체 선택 방법:
+  - React Three Fiber의 Pointer Event를 이용하여 설비 선택 기능을 구현
+  - Hover 시 Outline 효과를 적용하여 선택 가능한 설비를 시각적으로 강조
+  - 빈 공간 클릭 시 선택 상태 해제
 - 센서와 3D 객체 연결 방법:
+  - 기상청 Open API 데이터를 `WeatherData`로 변환한 후 `SensorData`로 표준화
+  - `statusService`에서 설비별 센서값(수위, 유량, 필터 부하, 수질)을 생성하고 상태를 계산
+  - 계산된 상태 정보를 각 3D 설비 모델과 설비 상태 카드에 전달하여 동일한 상태를 표시
 - 상태별 시각화 방법(정상·주의·위험):
+  - 정상: 회색으로 표시
+  - 주의: 노란색으로 표시
+  - 위험: 빨간색으로 표시
+  - 설비 상태에 따라 3D 모델의 색상과 설비 상태 카드의 상태 표시를 함께 변경하도록 구현
+
+### 데이터 처리 흐름
+
+```text
+기상청 Open API
+    │
+    ▼
+WeatherData
+    │
+    ▼
+SensorData
+    │
+    ▼
+statusService
+    │
+    ▼
+EquipmentStatus
+    │
+    ▼
+3D 모델 색상 변경
+    │
+    ▼
+설비 상태 카드 출력
+```
 
 ## 10. 이상징후 판단 방법
 
@@ -221,31 +260,37 @@ interface SensorData {
 ## 12. 실행 결과
 
 - 주요 화면:
-  - 기상 데이터 조회 화면
-  - 원본 API 응답(JSON) 확인 화면
-  - SensorData(JSON) 확인 화면
-- 정상 상태: 기상 데이터를 정상적으로 조회하고 화면에 출력
-- 이상 상태: 미구현
+  - 기상청 Open API 기반 기상 정보 조회 화면
+  - 3D 디지털 트윈 화면
+  - 설비 선택 및 상태 조회 화면
+- 정상 상태:
+  - 기상청 Open API에서 조회한 데이터를 화면에 정상적으로 출력
+  - 설비 상태를 계산하여 3D 모델과 설비 상태 카드에 반영
+- 이상 상태: 계산된 설비 상태가 주의(Warning) 또는 위험(Danger)인 경우 설비 색상 및 상태 정보를 변경해 표시
 - 알람 발생 화면: 미구현
-- 분석 결과: 미구현
+- 분석 결과: 기상 데이터를 기반으로 설비별 센서값(수위, 유량, 필터 부하, 수질)을 생성하고 상태를 계산해 시각화
 
 ## 13. 미구현 사항 및 한계
 
 - 구현하지 못한 기능:
-  - 3D 디지털 트윈
-  - 센서 데이터 연동
-  - 이상 탐지 및 AI 분석
-- 발생한 문제: 기상청 Open API의 응답 구조가 복잡해 데이터 가공 과정 필요
-- 해결하지 못한 이유: 단계별 진행에 따라 현재 Open API 연동 구현에 집중
-- 추가 개발 방향: 
-  - React Three Fiber 기반 3D 시각화
-  - 설비 상태 모니터링
-  - 이상 탐지 및 AI 기반 운영 지원 기능 추가
+  - 설비 이상 알람 및 통합 모니터링 기능
+  - 설비별 이상 이력 관리
+  - AI 기반 이상 탐지 및 분석 기능
+- 발생한 문제: 실제 설비 센서 데이터가 제공되지 않아 기상청 Open API 데이터를 기반으로 설비 상태를 생성하는 방식으로 구현
+- 해결하지 못한 이유: 과제 요구사항에 실제 설비 데이터 연동 환경이 제공되지 않아 기상 데이터를 활용한 시뮬레이션 방식으로 구현
+- 추가 개발 방향:
+  - 이상 설비 목록 및 알람 기능 추가
+  - 운영 지원 기능 추가
 
 ## 14. 참고자료 및 출처
 
-- 공개 3D 모델: 미구현
+- 공개 3D 모델: 없음(기본 Geometry를 이용하여 직접 구현)
 - 이미지: 없음
-- 라이브러리: React, Vite, TypeScript
-- 데이터 출처: 공공데이터포털
+- 라이브러리:
+  - React
+  - TypeScript
+  - Vite
+  - React Three Fiber
+  - Three.js
+- 데이터 출처: 공공데이터포털(기상청 단기예보 조회서비스)
 - 참고 문서: 없음
