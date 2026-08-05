@@ -12,7 +12,7 @@ export default function WeatherCard({
     error,
 }: WeatherCardProps) {
     return (
-        <div className="card weather flex-center">
+        <div className="card weather flex">
             <h2 className="cardTitle">기상 정보</h2>
 
             {loading ? (

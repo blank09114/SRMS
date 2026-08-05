@@ -2,14 +2,18 @@ import { useEffect, useState } from "react";
 
 import TwinScene from "../components/TwinScene";
 import WeatherCard from "../components/WeatherCard";
+import EquipmentCard from "../components/EquipmentCard";
 
 import { getWeather } from "../api/weatherApi";
+
 import type { WeatherResponse } from "../types/WeatherResponse";
+import type { Equipment } from "../types/Equipment";
 
 function HomePage() {
     const [weatherData, setWeatherData] = useState<WeatherResponse | null>(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
+    const [selectedEquipment, setSelectedEquipment] = useState<Equipment | null>(null);
 
     useEffect(() => {
         async function loadWeather() {
@@ -30,16 +34,17 @@ function HomePage() {
 
     return (
         <main className="page flex-center">
-            <h1 className="title">SRMS</h1>
-            <TwinScene />
+            <h1 className="title">Smart Rainwater Monitoring System</h1>
+            <TwinScene
+                selectedEquipment={selectedEquipment}
+                onSelectEquipment={setSelectedEquipment}
+            />
             <WeatherCard
                 weatherData={weatherData}
                 loading={loading}
                 error={error}
             />
-            <div className="card stat flex-center">
-                <h2 className="cardTitle">설비 상태</h2>
-            </div>
+            <EquipmentCard equipment={selectedEquipment} />
         </main>
     );
 }

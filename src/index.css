@@ -37,6 +37,11 @@ body { background: rgb(var(--color-background)); }
     align-items: center;
 }
 
+.flex {
+    display: flex;
+    flex-direction: column;
+}
+
 .page {
     width: 100%;
     height: 100vh;
@@ -62,7 +67,7 @@ body { background: rgb(var(--color-background)); }
     gap: var(--px-sm);
 }
 
-.stat {
+.equipment {
     width: 400px;
     min-height: 600px;
 
