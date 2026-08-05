@@ -8,6 +8,7 @@ interface ReuseTankProps {
 }
 
 export default function ReuseTank({ onSelect, onHover, state, }: ReuseTankProps) {
+    // 설비 상태에 따라 모델 색상 결정
     const color = getEquipmentColor(state);
 
     return (

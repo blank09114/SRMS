@@ -42,9 +42,10 @@ export default function TwinScene({
         <Canvas
             camera={{ position: [0, 6, 12], fov: 50 }}
             style={{ width: "100%", height: "500px" }}
-            onPointerMissed={() => onSelectEquipment(null)}
+            onPointerMissed={() => onSelectEquipment(null)} // 빈 공간 클릭 시 선택 상태 해제
         >
             <Selection>
+                {/* 선택 또는 Hover된 설비에 Outline 효과 적용 */}
                 <ambientLight intensity={2} />
                 <directionalLight position={[5, 10, 5]} />
 

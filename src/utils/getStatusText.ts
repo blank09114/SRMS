@@ -1,5 +1,6 @@
 import type { EquipmentState } from "../types/EquipmentStatus";
 
+// 텍스트 변환
 export function getStatusText(state: EquipmentState): string {
     switch (state) {
         case "normal":

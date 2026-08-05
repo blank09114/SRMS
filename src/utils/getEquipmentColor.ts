@@ -1,5 +1,6 @@
 import type { EquipmentState } from "../types/EquipmentStatus";
 
+// 설비 상태에 따른 3D 모델 색상 반환
 export function getEquipmentColor(state: EquipmentState) {
     switch (state) {
         case "warning":

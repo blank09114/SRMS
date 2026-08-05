@@ -40,6 +40,7 @@ const SENSOR_DEFINITIONS: readonly SensorDefinition[] = [
     },
 ] as const;
 
+// 기상 데이터를 SensorData 형식으로 변환
 export function mapWeatherToSensorData(weather: WeatherData): SensorData[] {
     return SENSOR_DEFINITIONS.map(sensor => ({
         timestamp: new Date().toISOString(),

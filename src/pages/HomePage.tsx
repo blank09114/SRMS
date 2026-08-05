@@ -15,6 +15,8 @@ function HomePage() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
     const [selectedEquipment, setSelectedEquipment] = useState<Equipment | null>(null);
+
+    // 기상청 API 데이터를 기반으로 설비 상태 정보를 생성
     const equipmentStatus = weatherData? getEquipmentStatus(weatherData.sensors): null;
 
     useEffect(() => {
