@@ -21,7 +21,7 @@ import type { EquipmentStatusMap } from "../types/EquipmentStatus";
 
 interface TwinSceneProps {
     selectedEquipment: Equipment | null;
-    equipmentStatus: EquipmentStatusMap;
+    equipmentStatus: EquipmentStatusMap | null;
     onSelectEquipment: (equipment: Equipment | null) => void;
 }
 
@@ -42,9 +42,10 @@ export default function TwinScene({
         <Canvas
             camera={{ position: [0, 6, 12], fov: 50 }}
             style={{ width: "100%", height: "500px" }}
-            onPointerMissed={() => onSelectEquipment(null)}
+            onPointerMissed={() => onSelectEquipment(null)} // 빈 공간 클릭 시 선택 상태 해제
         >
             <Selection>
+                {/* 선택 또는 Hover된 설비에 Outline 효과 적용 */}
                 <ambientLight intensity={2} />
                 <directionalLight position={[5, 10, 5]} />
 
@@ -62,7 +63,7 @@ export default function TwinScene({
                     hoveredEquipment?.id === "tank"
                 }>
                     <Tank
-                        state={equipmentStatus.tank.status}
+                        state={equipmentStatus?.tank.status ?? "normal"}
                         onSelect={() => onSelectEquipment(EQUIPMENT.tank)}
                         onHover={(hover) => handleHover(EQUIPMENT.tank, hover)}
                     />
@@ -75,7 +76,7 @@ export default function TwinScene({
                     hoveredEquipment?.id === "pump"
                 }>
                     <Pump
-                        state={equipmentStatus.pump.status}
+                        state={equipmentStatus?.pump.status ?? "normal"}
                         onSelect={() => onSelectEquipment(EQUIPMENT.pump)}
                         onHover={(hover) => handleHover(EQUIPMENT.pump, hover)}
                     />
@@ -88,7 +89,7 @@ export default function TwinScene({
                     hoveredEquipment?.id === "filter"
                 }>
                     <Filter
-                        state={equipmentStatus.filter.status}
+                        state={equipmentStatus?.filter.status ?? "normal"}
                         onSelect={() => onSelectEquipment(EQUIPMENT.filter)}
                         onHover={(hover) => handleHover(EQUIPMENT.filter, hover)}
                     />
@@ -101,7 +102,7 @@ export default function TwinScene({
                     hoveredEquipment?.id === "reuseTank"
                 }>
                     <ReuseTank
-                        state={equipmentStatus.reuseTank.status}
+                        state={equipmentStatus?.reuseTank.status ?? "normal"}
                         onSelect={() => onSelectEquipment(EQUIPMENT.reuseTank)}
                         onHover={(hover) => handleHover(EQUIPMENT.reuseTank, hover)}
                     />

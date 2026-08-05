@@ -4,7 +4,6 @@ import { mapWeatherToSensorData } from "../services/sensorMapper";
 
 const BASE_URL =
     "https://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst";
-
 const SERVICE_KEY = import.meta.env.VITE_KMA_SERVICE_KEY;
 
 export async function getWeather(): Promise<WeatherResponse> {
@@ -22,11 +21,9 @@ export async function getWeather(): Promise<WeatherResponse> {
     });
 
     const response = await fetch(`${BASE_URL}?${params}`);
-
     if (!response.ok) { throw new Error("API 호출 실패"); }
 
     const data = await response.json();
-
     if (data.response.header.resultCode !== "00") { throw new Error(data.response.header.resultMsg); }
 
     const items = data.response.body.items.item;

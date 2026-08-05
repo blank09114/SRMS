@@ -8,6 +8,7 @@ interface FilterProps {
 }
 
 export default function Filter({ onSelect, onHover, state, }: FilterProps) {
+    // 설비 상태에 따라 모델 색상 결정
     const color = getEquipmentColor(state);
 
     return (

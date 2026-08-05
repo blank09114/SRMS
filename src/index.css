@@ -6,8 +6,6 @@
 
     --color-text: 31, 41, 55;
 
-    --color-border: 209, 213, 219;
-
     --color-normal: 156, 163, 175;
     --color-warning: 245, 158, 11;
     --color-danger: 220, 38, 38;
@@ -30,6 +28,11 @@ html.no-transition *, html.no-transition *::before, html.no-transition *::after
 }
 body { background: rgb(var(--color-background)); }
 
+.flex {
+    display: flex;
+    flex-direction: column;
+}
+
 .flex-center {
     display: flex;
     flex-direction: column;
@@ -37,10 +40,9 @@ body { background: rgb(var(--color-background)); }
     align-items: center;
 }
 
-.flex {
-    display: flex;
-    flex-direction: column;
-}
+.status-normal { color: rgb(var(--color-normal)); }
+.status-warning { color: rgb(var(--color-warning)); }
+.status-danger { color: rgb(var(--color-danger)); }
 
 .page {
     width: 100%;
@@ -68,8 +70,7 @@ body { background: rgb(var(--color-background)); }
 }
 
 .equipment {
-    width: 400px;
-    min-height: 600px;
+    width: 300px;
 
     top: 50%;
     right: var(--px-lg);
