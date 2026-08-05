@@ -1,3 +1,4 @@
-export const EQUIPMENT = [
-    
-];
+export interface Equipment {
+    id: string;
+    name: string;
+}
