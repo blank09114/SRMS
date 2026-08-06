@@ -59,6 +59,73 @@ body { background: rgb(var(--color-background)); }
     top: var(--px-lg);
 }
 
+.demoToolbar {
+    position: absolute;
+    top: var(--px-lg);
+    right: var(--px-lg);
+    z-index: 10;
+
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    padding: 10px 14px;
+    background-color: rgb(var(--color-surface), 0.6);
+}
+
+.demoLabel {
+    min-width: 80px;
+
+    font-size: 14px;
+    font-weight: 700;
+    text-align: left;
+}
+
+.demoMode .demoLabel { color: rgb(var(--color-danger)); }
+
+.switch {
+    position: relative;
+
+    display: inline-flex;
+    align-items: center;
+
+    cursor: pointer;
+}
+
+.switchInput {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+
+    opacity: 0;
+}
+
+.switchTrack {
+    width: 48px;
+    height: 26px;
+
+    display: inline-flex;
+    align-items: center;
+
+    border: 1px solid rgb(var(--color-surface), 0.7);
+    background-color: rgb(var(--color-normal), 0.85);
+    transition: background-color 0.2s ease;
+}
+
+.switchThumb {
+    width: 20px;
+    height: 20px;
+
+    display: block;
+
+    background-color: rgb(var(--color-surface));
+    transform: translateX(2px);
+    transition: transform 0.2s ease;
+}
+
+.switchInput:checked + .switchTrack { background-color: rgb(var(--color-danger)); }
+.switchInput:checked + .switchTrack .switchThumb { transform: translateX(24px); }
+
 .card {
     position: absolute;
 
