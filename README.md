@@ -2,7 +2,7 @@
 
 - 지원자명: 박예린
 - 제출일: 2026.08.05
-- 배포 URL:
+- 배포 URL: https://srms-brown.vercel.app/
 - Git 저장소 URL: https://github.com/blank09114/SRMS
 - 시연 영상 URL:
 
