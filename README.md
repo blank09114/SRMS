@@ -4,7 +4,7 @@
 - 제출일: 2026.08.06.
 - 배포 URL: https://srms-brown.vercel.app/
 - Git 저장소 URL: https://github.com/blank09114/SRMS
-- 시연 영상 URL: 
+- 시연 영상 URL: https://youtu.be/yG-f8MnSPUQ
 
 ---
 
