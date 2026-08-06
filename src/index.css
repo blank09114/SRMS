@@ -40,7 +40,6 @@ body { background: rgb(var(--color-background)); }
     align-items: center;
 }
 
-.status-normal { color: rgb(var(--color-normal)); }
 .status-warning { color: rgb(var(--color-warning)); }
 .status-danger { color: rgb(var(--color-danger)); }
 
@@ -82,6 +81,13 @@ body { background: rgb(var(--color-background)); }
     left: var(--px-lg);
 }
 
+.warning {
+    width: 400px;
+    min-height: 300px;
+    top: var(--px-lg);
+    left: var(--px-lg);
+}
+
 .cardTitle { font-size: 24px; }
 
 .cardText {
@@ -91,4 +97,9 @@ body { background: rgb(var(--color-background)); }
 
     font-size: 16px;
     line-height: 1.5;
+}
+
+.cardTitle.sub {
+    text-align: left;
+    font-size: 20px;
 }
