@@ -11,6 +11,8 @@ export default function WeatherCard({
     loading,
     error,
 }: WeatherCardProps) {
+    const isDemoData = weatherData?.sensors.some(sensor => sensor.source === "DEMO") ?? false;
+
     return (
         <div className="card weather flex">
             <h2 className="cardTitle">기상 정보</h2>
@@ -29,7 +31,7 @@ export default function WeatherCard({
                     </p>
 
                     <p className="cardText">
-                        데이터 출처: 기상청 단기예보 조회 서비스 <br />
+                        데이터 출처: {isDemoData ? "시연용 더미 데이터" : "기상청 단기예보 조회 서비스"} <br />
                         마지막 조회:
                         {" "}
                         {weatherData?.fetchedAt.toLocaleString("ko-KR")}

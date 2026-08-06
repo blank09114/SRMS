@@ -40,7 +40,6 @@ body { background: rgb(var(--color-background)); }
     align-items: center;
 }
 
-.status-normal { color: rgb(var(--color-normal)); }
 .status-warning { color: rgb(var(--color-warning)); }
 .status-danger { color: rgb(var(--color-danger)); }
 
@@ -59,6 +58,73 @@ body { background: rgb(var(--color-background)); }
     position: absolute;
     top: var(--px-lg);
 }
+
+.demoToolbar {
+    position: absolute;
+    top: var(--px-lg);
+    right: var(--px-lg);
+    z-index: 10;
+
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    padding: 10px 14px;
+    background-color: rgb(var(--color-surface), 0.6);
+}
+
+.demoLabel {
+    min-width: 80px;
+
+    font-size: 14px;
+    font-weight: 700;
+    text-align: left;
+}
+
+.demoMode .demoLabel { color: rgb(var(--color-danger)); }
+
+.switch {
+    position: relative;
+
+    display: inline-flex;
+    align-items: center;
+
+    cursor: pointer;
+}
+
+.switchInput {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+
+    opacity: 0;
+}
+
+.switchTrack {
+    width: 48px;
+    height: 26px;
+
+    display: inline-flex;
+    align-items: center;
+
+    border: 1px solid rgb(var(--color-surface), 0.7);
+    background-color: rgb(var(--color-normal), 0.85);
+    transition: background-color 0.2s ease;
+}
+
+.switchThumb {
+    width: 20px;
+    height: 20px;
+
+    display: block;
+
+    background-color: rgb(var(--color-surface));
+    transform: translateX(2px);
+    transition: transform 0.2s ease;
+}
+
+.switchInput:checked + .switchTrack { background-color: rgb(var(--color-danger)); }
+.switchInput:checked + .switchTrack .switchThumb { transform: translateX(24px); }
 
 .card {
     position: absolute;
@@ -82,11 +148,91 @@ body { background: rgb(var(--color-background)); }
     left: var(--px-lg);
 }
 
+.card.warning {
+    width: 400px;
+    min-height: 300px;
+    top: var(--px-lg);
+    left: var(--px-lg);
+}
+
 .cardTitle { font-size: 24px; }
 
 .cardText {
     width: 100%;
     
+    text-align: left;
+
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+.cardTitle.sub {
+    text-align: left;
+    font-size: 20px;
+}
+
+.analysisItem {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    gap: var(--px-sm);
+}
+
+.analysisHeader {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    gap: var(--px-sm);
+
+    background: none;
+    border: none;
+
+    cursor: pointer;
+}
+
+.analysisBadge {
+    width: 50px;
+
+    padding: 4px;
+    border-radius: 4px;
+
+    flex-shrink: 0;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    color: rgb(var(--color-surface));
+}
+
+.analysisBadge.warning { background: rgb(var(--color-warning)); }
+.analysisBadge.danger { background: rgb(var(--color-danger)); }
+
+.analysisTitle {
+    flex: 1;
+
+    text-align: left;
+
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.analysisArrow {
+    width: 20px;
+    font-size: 12px;
+}
+
+.analysisSection {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.analysisSection .cardText { font-size: 16px; }
+.analysisEvidence { margin-left: var(--px-md); }
+
+.analysisEvidence li {
     text-align: left;
 
     font-size: 16px;
