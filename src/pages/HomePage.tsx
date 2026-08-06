@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import TwinScene from "../components/TwinScene";
 import WeatherCard from "../components/WeatherCard";
 import EquipmentCard from "../components/EquipmentCard";
+import WarningCard from "../components/WarningCard";
 
 import { getWeather } from "../api/weatherApi";
 import { getEquipmentStatus } from "../services/statusService";
@@ -53,6 +54,7 @@ function HomePage() {
                 equipment={selectedEquipment}
                 equipmentStatus={equipmentStatus}
             />
+            <WarningCard />
         </main>
     );
 }
