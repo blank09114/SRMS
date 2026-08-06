@@ -7,6 +7,7 @@ import WarningCard from "../components/WarningCard";
 
 import { getWeather } from "../api/weatherApi";
 import { getEquipmentStatus } from "../services/statusService";
+import { analyzeSystem } from "../services/analysisService";
 
 import type { WeatherResponse } from "../types/WeatherResponse";
 import type { Equipment } from "../types/Equipment";
@@ -19,6 +20,9 @@ function HomePage() {
 
     // 기상청 API 데이터를 기반으로 설비 상태 정보를 생성
     const equipmentStatus = weatherData? getEquipmentStatus(weatherData.sensors): null;
+
+    // 모니터링 정보
+    const analysis = weatherData && equipmentStatus? analyzeSystem(weatherData, equipmentStatus): [];
 
     useEffect(() => {
         async function loadWeather() {
@@ -54,7 +58,7 @@ function HomePage() {
                 equipment={selectedEquipment}
                 equipmentStatus={equipmentStatus}
             />
-            <WarningCard />
+            <WarningCard analysis={analysis} />
         </main>
     );
 }
