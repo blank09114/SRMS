@@ -1,7 +1,7 @@
 import type { EquipmentStatusMap } from "../types/EquipmentStatus";
 import type { WeatherResponse } from "../types/WeatherResponse";
 
-export type AnalysisLevel = "warning" | "danger";
+export type AnalysisLevel = "normal" | "warning" | "danger";
 
 export interface AnalysisResult {
     level: AnalysisLevel;
@@ -30,6 +30,17 @@ export function analyzeSystem(
     const flowRate = equipment.pump.sensors.flowRate ?? 0;
     const filterLoad = equipment.filter.sensors.filterLoad ?? 0;
     const quality = equipment.reuseTank.sensors.quality ?? 0;
+
+    // 정상
+    if (results.length === 0) {
+    results.push({
+        level: "normal",
+        title: "정상",
+        cause: "현재 설비에서 이상 징후가 발견되지 않았습니다.",
+        evidence: [ "모든 설비가 정상 범위에서 동작 중입니다.", ],
+        recommendation: "현재 상태를 유지하십시오.",
+    });
+}
 
     // 저장탱크 과충전
     if (tankLevel >= 90) {

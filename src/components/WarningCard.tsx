@@ -6,13 +6,12 @@ interface Props { analysis: AnalysisResult[]; }
 
 export default function WarningCard({ analysis }: Props) {
     const [openedIndex, setOpenedIndex] = useState<number | null>(0);
+    const isNormal = analysis.length === 1 && analysis[0].level === "normal";
 
     return (
         <div className="card warning flex">
             <h2 className="cardTitle">AX 이상징후 분석</h2>
-            {analysis.length === 0 ? (
-                <p className="cardText"> 현재 이상징후가 발견되지 않았습니다. </p>
-            ) : (
+            {isNormal ? (<p className="cardText"> 모든 설비가 정상 동작 중입니다. </p>) : (
                 analysis.map((item, index) => {
                     const opened = openedIndex === index;
 
@@ -21,30 +20,31 @@ export default function WarningCard({ analysis }: Props) {
                             key={`${item.title}-${index}`}
                             className={`analysisItem ${ index === analysis.length - 1 ? "last" : "" }`}
                         >
-                            <button className="analysisHeader"
-                                onClick={() => setOpenedIndex(opened ? null : index) }
+                            <div
+                                className="analysisHeader"
+                                onClick={() => setOpenedIndex(opened ? null : index)}
                             >
                                 <span className={ item.level === "danger"? "analysisBadge danger": "analysisBadge warning" }>
                                     {item.level === "danger"? "위험": "주의"}
                                 </span>
                                 <span className="analysisTitle"> {item.title} </span>
-                                <span className="analysisArrow"> {opened ? "▼" : "▶"} </span>
-                            </button>
+                                <span className="analysisArrow"> {opened ? "▼" : "◀"} </span>
+                            </div>
 
                             {opened && (
                                 <>
                                     <div className="analysisSection">
-                                        <div className="analysisLabel"> 원인 </div>
+                                        <p className="cardText"> <strong>원인</strong> </p>
                                         <p className="cardText"> {item.cause} </p>
                                     </div>
                                     <div className="analysisSection">
-                                        <div className="analysisLabel"> 판단 근거 </div>
+                                        <p className="cardText"> <strong>판단 근거</strong> </p>
                                         <ul className="analysisEvidence">
                                             {item.evidence.map((evidence) => ( <li key={evidence}> {evidence} </li>))}
                                         </ul>
                                     </div>
                                     <div className="analysisSection">
-                                        <div className="analysisLabel"> 권장 조치 </div>
+                                        <p className="cardText"> <strong>권장 조치</strong> </p>
                                         <p className="cardText"> {item.recommendation} </p>
                                     </div>
                                 </>

@@ -81,7 +81,7 @@ body { background: rgb(var(--color-background)); }
     left: var(--px-lg);
 }
 
-.warning {
+.card.warning {
     width: 400px;
     min-height: 300px;
     top: var(--px-lg);
@@ -110,15 +110,6 @@ body { background: rgb(var(--color-background)); }
     display: flex;
     flex-direction: column;
     gap: var(--px-sm);
-
-    padding: var(--px-sm) 0;
-
-    border-bottom: 1px solid rgba(var(--color-text), .15);
-}
-
-.analysisItem.last {
-    padding-bottom: 0;
-    border-bottom: none;
 }
 
 .analysisHeader {
@@ -135,10 +126,9 @@ body { background: rgb(var(--color-background)); }
 }
 
 .analysisBadge {
-    width: 52px;
+    width: 50px;
 
-    padding: 4px 0;
-
+    padding: 4px;
     border-radius: 4px;
 
     flex-shrink: 0;
@@ -162,10 +152,7 @@ body { background: rgb(var(--color-background)); }
 }
 
 .analysisArrow {
-    width: 18px;
-
-    color: rgb(var(--color-normal));
-
+    width: 20px;
     font-size: 12px;
 }
 
@@ -175,17 +162,8 @@ body { background: rgb(var(--color-background)); }
     gap: 4px;
 }
 
-.analysisLabel {
-    text-align: left;
-
-    font-size: 14px;
-    font-weight: 700;
-
-    color: rgb(var(--color-normal));
-}
-
 .analysisSection .cardText { font-size: 16px; }
-.analysisEvidence { margin-left: 18px; }
+.analysisEvidence { margin-left: var(--px-md); }
 
 .analysisEvidence li {
     text-align: left;
@@ -193,5 +171,3 @@ body { background: rgb(var(--color-background)); }
     font-size: 16px;
     line-height: 1.5;
 }
-
-.analysisEvidence li + li { margin-top: 2px; }

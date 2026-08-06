@@ -1,7 +1,7 @@
 # 한일환경테크 2차 과제 - 산업용 Open API 데이터 기반 3D 디지털 트윈·AX 프로토타입
 
 - 지원자명: 박예린
-- 제출일: 2026.08.05
+- 제출일: 2026.08.06.
 - 배포 URL: https://srms-brown.vercel.app/
 - Git 저장소 URL: https://github.com/blank09114/SRMS
 - 시연 영상 URL:
