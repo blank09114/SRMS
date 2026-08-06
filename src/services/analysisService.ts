@@ -31,17 +31,6 @@ export function analyzeSystem(
     const filterLoad = equipment.filter.sensors.filterLoad ?? 0;
     const quality = equipment.reuseTank.sensors.quality ?? 0;
 
-    // 정상
-    if (results.length === 0) {
-    results.push({
-        level: "normal",
-        title: "정상",
-        cause: "현재 설비에서 이상 징후가 발견되지 않았습니다.",
-        evidence: [ "모든 설비가 정상 범위에서 동작 중입니다.", ],
-        recommendation: "현재 상태를 유지하십시오.",
-    });
-}
-
     // 저장탱크 과충전
     if (tankLevel >= 90) {
         results.push({
@@ -53,6 +42,31 @@ export function analyzeSystem(
                 "안전 기준 : 90% 이상",
             ],
             recommendation: "배출 상태를 확인하고 저장 용량을 확보하십시오.",
+        });
+    }
+
+    // 펌프 과부하
+    if (flowRate >= 35) {
+        results.push({
+            level: "danger",
+            title: "펌프 과부하",
+            cause: "펌프 유량이 위험 기준을 초과해 설비 부하가 커질 수 있습니다.",
+            evidence: [
+                `현재 유량 ${flowRate.toFixed(1)} L/min`,
+                "위험 기준 : 35 L/min 이상",
+            ],
+            recommendation: "펌프 상태를 점검하고 유입량을 조절하십시오.",
+        });
+    } else if (flowRate >= 20) {
+        results.push({
+            level: "warning",
+            title: "펌프 유량 증가",
+            cause: "펌프 유량이 주의 기준을 초과했습니다.",
+            evidence: [
+                `현재 유량 ${flowRate.toFixed(1)} L/min`,
+                "주의 기준 : 20 L/min 이상",
+            ],
+            recommendation: "펌프 운전 상태와 배출 경로를 확인하십시오.",
         });
     }
 
@@ -141,8 +155,8 @@ export function analyzeSystem(
     // 정상
     if (results.length === 0) {
         results.push({
-            level: "warning",
-            title: "이상 없음",
+            level: "normal",
+            title: "정상",
             cause: "현재 설비에서 이상 징후가 발견되지 않았습니다.",
             evidence: [
                 "모든 설비가 정상 범위에서 동작 중입니다.",
